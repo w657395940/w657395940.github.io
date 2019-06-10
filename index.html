@@ -300,15 +300,13 @@
       
         
           
-            <p>#关于Git linux#<br>在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。</p>
-<p>##Git原理##<br>Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitory ，git服务器上的版本），一般的数据流为：工作区-&gt;本地版本库-&gt;远程版本库。<br>在本地版本库时(Local repository)，可以创建多个分支，默认创建了一个本地Master分支。在没有创建其他分支的时候，可以认为本地Master分支就是本地版本库时(Local repository)。<br>其数据交互和相关的命令如下图所示：<br><img src="/images/git.png" alt="Git"></p>
-<p>##Git服务器搭建##</p>
-<p>首先在服务器Server上创建一个名为git的用户 。</p>
+            <h1 id="关于Git-linux"><a href="#关于Git-linux" class="headerlink" title="关于Git linux"></a>关于Git linux</h1><p>在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。</p>
+<h2 id="Git原理"><a href="#Git原理" class="headerlink" title="Git原理"></a>Git原理</h2><p>Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitory ，git服务器上的版本），一般的数据流为：工作区-&gt;本地版本库-&gt;远程版本库。<br>在本地版本库时(Local repository)，可以创建多个分支，默认创建了一个本地Master分支。在没有创建其他分支的时候，可以认为本地Master分支就是本地版本库时(Local repository)。<br>其数据交互和相关的命令如下图所示：</p>
+<h1 id><a href="#" class="headerlink" title></a><img src="/images/git.png" alt="Git"></h1><h2 id="Git服务器搭建"><a href="#Git服务器搭建" class="headerlink" title="Git服务器搭建"></a>Git服务器搭建</h2><p>首先在服务器Server上创建一个名为git的用户 。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sudo adduser git  </span><br><span class="line">$sudo passwd git</span><br></pre></td></tr></table></figure>
 
 <p>我们配置用户A使用git这个用户免认证登录服务器Server。</p>
-<p>###使用 authorized_keys 方法来给用户授权###</p>
-<p>在用户A主机上生成公钥、私钥：</p>
+<h3 id="使用-authorized-keys-方法来给用户授权"><a href="#使用-authorized-keys-方法来给用户授权" class="headerlink" title="使用 authorized_keys 方法来给用户授权"></a>使用 authorized_keys 方法来给用户授权</h3><p>在用户A主机上生成公钥、私钥：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 
 <p>默认在 ~/.ssh目录生成两个文件：</p>
@@ -323,23 +321,19 @@
 <p>修改文件权限：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 700 ~/.ssh</span><br><span class="line">$ chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 
-<p>###在服务器Server用–bare选项新建一个裸仓库###</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$cd</span><br><span class="line">$mkdir project.git</span><br><span class="line">$cd project.git</span><br><span class="line">$git --bare init</span><br></pre></td></tr></table></figure>
+<h3 id="在服务器Server用–bare选项新建一个裸仓库"><a href="#在服务器Server用–bare选项新建一个裸仓库" class="headerlink" title="在服务器Server用–bare选项新建一个裸仓库"></a>在服务器Server用–bare选项新建一个裸仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$cd</span><br><span class="line">$mkdir project.git</span><br><span class="line">$cd project.git</span><br><span class="line">$git --bare init</span><br></pre></td></tr></table></figure>
 
 <p>这时，用户就可以把它加为远程仓库，推送一个分支，从而把第一个版本的项目文件上传到仓库里了。</p>
 <p>如在用户A主机上：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd myproject</span><br><span class="line">$ git init</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m &apos;initial commit&apos;</span><br><span class="line">$ git remote add origin git@gitserver:～/project.git</span><br><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
 
-<p>###限制 git 用户的活动范围###</p>
-<p>把 git 用户登入的 shell设置git-shell 。</p>
+<h3 id="限制-git-用户的活动范围"><a href="#限制-git-用户的活动范围" class="headerlink" title="限制 git 用户的活动范围"></a>限制 git 用户的活动范围</h3><p>把 git 用户登入的 shell设置git-shell 。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/passwd</span><br></pre></td></tr></table></figure>
 
 <p>在文件末尾，git用户的一行，修改为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git:x:531:531::/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
 
-<p>现在 git 用户只能用 SSH 连接来推送和获取 Git 仓库，而不能直接使用主机 shell。</p>
-<p>##git仓库的使用</p>
-<p>主要的操作：</p>
+<h1 id="现在-git-用户只能用-SSH-连接来推送和获取-Git-仓库，而不能直接使用主机-shell。"><a href="#现在-git-用户只能用-SSH-连接来推送和获取-Git-仓库，而不能直接使用主机-shell。" class="headerlink" title="现在 git 用户只能用 SSH 连接来推送和获取 Git 仓库，而不能直接使用主机 shell。"></a>现在 git 用户只能用 SSH 连接来推送和获取 Git 仓库，而不能直接使用主机 shell。</h1><h2 id="git仓库的使用"><a href="#git仓库的使用" class="headerlink" title="git仓库的使用"></a>git仓库的使用</h2><p>主要的操作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$cd project</span><br><span class="line">$git init</span><br><span class="line">$git status</span><br><span class="line">$git add .</span><br><span class="line">$git commit -m &quot;Version 1.0&quot;</span><br><span class="line">$ git remote add origin git@gitserver:～/project.git</span><br><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
 
 <p>到这一步，会推送一个分支到远程版本库（Remote repostitory ）。</p>
