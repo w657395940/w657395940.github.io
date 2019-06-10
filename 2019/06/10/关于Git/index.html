@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="#关于Git linux在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。 ##Git原理Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitory ，">
+<meta name="description" content="#关于Git linux#在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。 ##Git原理##Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于Git">
 <meta property="og:url" content="http://wtiny.cc/2019/06/10/关于Git/index.html">
 <meta property="og:site_name" content="Wt&#39;s Blog">
-<meta property="og:description" content="#关于Git linux在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。 ##Git原理Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitory ，">
+<meta property="og:description" content="#关于Git linux#在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。 ##Git原理##Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitor">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wtiny.cc/images/git.png">
 <meta property="og:image" content="http://wtiny.cc/images/git2.png">
-<meta property="og:updated_time" content="2019-06-10T12:53:22.680Z">
+<meta property="og:updated_time" content="2019-06-10T12:59:29.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于Git">
-<meta name="twitter:description" content="#关于Git linux在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。 ##Git原理Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitory ，">
+<meta name="twitter:description" content="#关于Git linux#在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。 ##Git原理##Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitor">
 <meta name="twitter:image" content="http://wtiny.cc/images/git.png">
 
 
@@ -302,51 +302,68 @@
       
 
       
-        <p>#关于Git linux<br>在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。</p>
-<p>##Git原理<br>Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitory ，git服务器上的版本），一般的数据流为：工作区-&gt;本地版本库-&gt;远程版本库。<br>在本地版本库时(Local repository)，可以创建多个分支，默认创建了一个本地Master分支。在没有创建其他分支的时候，可以认为本地Master分支就是本地版本库时(Local repository)。<br>其数据交互和相关的命令如下图所示：<br><img src="/images/git.png" alt="Git"></p>
-<p>#Git服务器搭建</p>
+        <p>#关于Git linux#<br>在linux下使用Git很方便。有很多关于Git的教程，在这把自己对Git的理解记录下来。</p>
+<p>##Git原理##<br>Git主要的原理，个人理解就是镜像备份，如下图（Git Data Flow And Commands）所示主要分为三个部分，工作区（Working directory）、本地版本库(Local repository)、远程版本库（Remote repostitory ，git服务器上的版本），一般的数据流为：工作区-&gt;本地版本库-&gt;远程版本库。<br>在本地版本库时(Local repository)，可以创建多个分支，默认创建了一个本地Master分支。在没有创建其他分支的时候，可以认为本地Master分支就是本地版本库时(Local repository)。<br>其数据交互和相关的命令如下图所示：<br><img src="/images/git.png" alt="Git"></p>
+<p>##Git服务器搭建##</p>
 <p>首先在服务器Server上创建一个名为git的用户 。</p>
-<p>$sudo adduser git<br>$sudo passwd git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sudo adduser git  </span><br><span class="line">$sudo passwd git</span><br></pre></td></tr></table></figure>
+
 <p>我们配置用户A使用git这个用户免认证登录服务器Server。</p>
-<p>##使用 authorized_keys 方法来给用户授权</p>
+<p>###使用 authorized_keys 方法来给用户授权###</p>
 <p>在用户A主机上生成公钥、私钥：</p>
-<p>$ssh-keygen -t rsa</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
 <p>默认在 ~/.ssh目录生成两个文件：</p>
-<p>id_rsa      ：私钥<br>id_rsa.pub  ：公钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id_rsa      ：私钥</span><br><span class="line">id_rsa.pub  ：公钥</span><br></pre></td></tr></table></figure>
+
 <p>把公钥复制到服务器Server上：</p>
-<p>$scp ~/.ssh/id_rsa.pub xxx@host:～ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scp ~/.ssh/id_rsa.pub xxx@host:～</span><br></pre></td></tr></table></figure>
+
 <p>然后，将公钥导入到认证文件尾</p>
-<p>$cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
 <p>修改文件权限：</p>
-<p>$ chmod 700 ~/.ssh<br>$ chmod 600 ~/.ssh/authorized_keys  </p>
-<p>##在服务器Server用–bare选项新建一个裸仓库</p>
-<p>$cd<br>$mkdir project.git<br>$cd project.git<br>$git –bare init</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 700 ~/.ssh</span><br><span class="line">$ chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>###在服务器Server用–bare选项新建一个裸仓库###</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$cd</span><br><span class="line">$mkdir project.git</span><br><span class="line">$cd project.git</span><br><span class="line">$git --bare init</span><br></pre></td></tr></table></figure>
+
 <p>这时，用户就可以把它加为远程仓库，推送一个分支，从而把第一个版本的项目文件上传到仓库里了。</p>
 <p>如在用户A主机上：</p>
-<p>$ cd myproject<br>$ git init<br>$ git add .<br>$ git commit -m ‘initial commit’<br>$ git remote add origin git@gitserver:～/project.git<br>$ git push origin master</p>
-<p>##限制 git 用户的活动范围</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd myproject</span><br><span class="line">$ git init</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m &apos;initial commit&apos;</span><br><span class="line">$ git remote add origin git@gitserver:～/project.git</span><br><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+
+<p>###限制 git 用户的活动范围###</p>
 <p>把 git 用户登入的 shell设置git-shell 。</p>
-<p>$ sudo vim /etc/passwd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/passwd</span><br></pre></td></tr></table></figure>
+
 <p>在文件末尾，git用户的一行，修改为：</p>
-<p>git:x:531:531::/home/git:/usr/bin/git-shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git:x:531:531::/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
+
 <p>现在 git 用户只能用 SSH 连接来推送和获取 Git 仓库，而不能直接使用主机 shell。</p>
-<p>#git仓库的使用</p>
+<p>##git仓库的使用</p>
 <p>主要的操作：</p>
-<p>$cd project<br>$git init<br>$git status<br>$git add .<br>$git commit -m “Version 1.0”<br>$ git remote add origin git@gitserver:～/project.git<br>$ git push origin master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$cd project</span><br><span class="line">$git init</span><br><span class="line">$git status</span><br><span class="line">$git add .</span><br><span class="line">$git commit -m &quot;Version 1.0&quot;</span><br><span class="line">$ git remote add origin git@gitserver:～/project.git</span><br><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+
 <p>到这一步，会推送一个分支到远程版本库（Remote repostitory ）。</p>
 <p>在开发的时候，建议再创建一个分支 dev分支。这dev分支上做开发，然后合并到本地master分支，再推到远程版本库。先查看一下目前有的分支 。</p>
-<p>$cd project<br>$git branch<br>*master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cd project</span><br><span class="line">$git branch</span><br><span class="line">*master</span><br></pre></td></tr></table></figure>
+
 <p>创建dev分支：</p>
-<p>$git branch dev<br>$git branch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$git branch dev</span><br><span class="line">$git branch</span><br></pre></td></tr></table></figure>
+
 <p>切换到dev分支：</p>
-<p>$git checkout dev</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git checkout dev</span><br></pre></td></tr></table></figure>
+
 <p>开发….</p>
 <p>在dev分支下，提交当前工作</p>
-<p>$git status<br>$git add .<br>$git commit -m “Version 2.0 “</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$git status</span><br><span class="line">$git add .</span><br><span class="line">$git commit -m &quot;Version 2.0 &quot;</span><br></pre></td></tr></table></figure>
+
 <p>然后合并分支，先切换到master分支下：</p>
-<p>$git  checkout master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git  checkout master</span><br></pre></td></tr></table></figure>
+
 <p>合并dev分支：</p>
-<p>$git merge dev</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git merge dev</span><br></pre></td></tr></table></figure>
+
 <hr>
 <p>在以上使用中，通过 git status、 gitk（GUI程序） 、Qgit等配合使用 。</p>
 <p>下面是使用gitk查看git：<br><img src="/images/git2.png" alt="Git"></p>
