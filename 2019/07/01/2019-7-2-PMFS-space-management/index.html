@@ -87,7 +87,7 @@
 <meta property="og:description" content="PMFS 空间管理分析PMFS通过blocknode list管理已分配的空间。 12345struct pmfs_blocknode &amp;#123;	struct list_head link;	unsigned long block_low;	unsigned long block_high;&amp;#125;;  在挂载PMFS操作中，super block、日志meta和inode table 指">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wtiny.cc/images/pmfs-space-management.png">
-<meta property="og:updated_time" content="2019-07-02T03:23:48.648Z">
+<meta property="og:updated_time" content="2019-07-02T03:27:51.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019-7-2-PMFS-space-management">
 <meta name="twitter:description" content="PMFS 空间管理分析PMFS通过blocknode list管理已分配的空间。 12345struct pmfs_blocknode &amp;#123;	struct list_head link;	unsigned long block_low;	unsigned long block_high;&amp;#125;;  在挂载PMFS操作中，super block、日志meta和inode table 指">
@@ -263,7 +263,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-01T19:29:53-07:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-01T19:29:53+08:00">
                 2019-07-01
               </time>
             
@@ -308,7 +308,7 @@
 <p>在为inode table （512个page）分配空间时，开始块号由以下表达式计算：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new_block_low = (i-&gt;block_high + num_blocks) &amp; ~(num_blocks - 1); </span><br><span class="line">// i-&gt;block_high=1024，num_blocks=512。</span><br></pre></td></tr></table></figure>
 
-<p>因此，第二个blocknode 是从1536开始。<br>PMFS挂载初始化后的空间布局如下图所示：<br><img src="/images/pmfs-space-management.png" alt="Git"></p>
+<p>因此，第二个blocknode 是从1536开始。PMFS挂载初始化后的空间布局如下图所示：<br><img src="/images/pmfs-space-management.png" alt="Git"></p>
 
       
     </div>
