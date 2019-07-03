@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="#Git已提交版本切换及回退 我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示： 现在想使用版本回退操作，把当前的版本回退某一个版本。首先了解一下git reset 的使用方法： 使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面6位（4401d0）来代替。">
+<meta name="description" content="Git已提交版本切换及回退我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示： 现在想使用版本回退操作，把当前的版本回退某一个版本。首先了解一下git reset 的使用方法： 使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面几位（4401d0）来代替。 使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019-7-3-Git已提交版本切换及回退">
 <meta property="og:url" content="http://wtiny.cc/2019/07/03/2019-7-3-Git已提交版本切换及回退/index.html">
 <meta property="og:site_name" content="Wt&#39;s Blog">
-<meta property="og:description" content="#Git已提交版本切换及回退 我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示： 现在想使用版本回退操作，把当前的版本回退某一个版本。首先了解一下git reset 的使用方法： 使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面6位（4401d0）来代替。">
+<meta property="og:description" content="Git已提交版本切换及回退我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示： 现在想使用版本回退操作，把当前的版本回退某一个版本。首先了解一下git reset 的使用方法： 使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面几位（4401d0）来代替。 使用">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wtiny.cc/images/git-log.png">
 <meta property="og:image" content="http://wtiny.cc/images/git-reset-usage.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="http://wtiny.cc/images/git-reflog.png">
 <meta property="og:image" content="http://wtiny.cc/images/git-reset2.png">
 <meta property="og:image" content="http://wtiny.cc/images/git-log3.png">
-<meta property="og:updated_time" content="2019-07-03T03:03:13.868Z">
+<meta property="og:updated_time" content="2019-07-03T03:08:00.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019-7-3-Git已提交版本切换及回退">
-<meta name="twitter:description" content="#Git已提交版本切换及回退 我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示： 现在想使用版本回退操作，把当前的版本回退某一个版本。首先了解一下git reset 的使用方法： 使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面6位（4401d0）来代替。">
+<meta name="twitter:description" content="Git已提交版本切换及回退我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示： 现在想使用版本回退操作，把当前的版本回退某一个版本。首先了解一下git reset 的使用方法： 使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面几位（4401d0）来代替。 使用">
 <meta name="twitter:image" content="http://wtiny.cc/images/git-log.png">
 
 
@@ -307,15 +307,14 @@
       
 
       
-        <p>#Git已提交版本切换及回退</p>
-<p>我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示：<br><img src="/images/git-log.png" alt="Git"></p>
+        <h1 id="Git已提交版本切换及回退"><a href="#Git已提交版本切换及回退" class="headerlink" title="Git已提交版本切换及回退"></a>Git已提交版本切换及回退</h1><p>我们对file.c进行3次修改，并提交了3个版本。用命令 git log 查看结果，如下所示：<br><img src="/images/git-log.png" alt="Git"></p>
 <p>现在想使用版本回退操作，把当前的版本回退某一个版本。首先了解一下git reset 的使用方法：<br><img src="/images/git-reset-usage.png" alt="Git"></p>
-<p>使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面6位（4401d0）来代替。<br><img src="/images/git-reset.png" alt="Git"></p>
-<p>使用git log查看,已经回退到4401d0版本。<br><img src="/images/git-log2.png" alt="Git"></p>
+<p>使用git reset命令回退到4401d0710b5a67cbb2c6c5897ff602baf2d4d657版本，其中commit可以使用前面几位（4401d0）来代替。<br><img src="/images/git-reset.png" alt="Git"></p>
+<p>使用git log查看，已经回退到4401d0版本。<br><img src="/images/git-log2.png" alt="Git"></p>
 <p>Third version 没有了。但是现在想回退到最新的版本，third version。<br>仍然是通过版本号回退，使用 git reset –hard 版本号</p>
 <p>如果已经找不着Third version的commit号，可以通过命令git reflog 查看，查看结果如下所示：<br><img src="/images/git-reflog.png" alt="Git"></p>
-<p>使用git reset命令回退到719c60版本，git log查看回退结果：<br><img src="/images/git-reset2.png" alt="Git"><br><img src="/images/git-log3.png" alt="Git"></p>
-
+<p>使用git reset命令回退到719c60版本，git log查看回退结果：<br><img src="/images/git-reset2.png" alt="Git"></p>
+<h1 id><a href="#" class="headerlink" title></a><img src="/images/git-log3.png" alt="Git"></h1>
       
     </div>
     
@@ -399,8 +398,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -442,6 +450,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git已提交版本切换及回退"><span class="nav-number">1.</span> <span class="nav-text">Git已提交版本切换及回退</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
