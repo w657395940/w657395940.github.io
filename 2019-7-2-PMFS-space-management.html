@@ -80,9 +80,9 @@
 
 
 <meta name="description" content="PMFS 空间管理分析PMFS通过blocknode list管理已分配的空间。 12345struct pmfs_blocknode &amp;#123;	struct list_head link;	unsigned long block_low;	unsigned long block_high;&amp;#125;;  在挂载PMFS操作中，super block、日志meta和inode table 指">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:title" content="2019-7-2-PMFS-space-management">
-<meta property="og:url" content="http://wtiny.cc/2019/07/01/2019-7-2-PMFS-space-management/index.html">
+<meta property="og:url" content="http://wtiny.cc/2019-7-2-PMFS-space-management.html">
 <meta property="og:site_name" content="Wt&#39;s Blog">
 <meta property="og:description" content="PMFS 空间管理分析PMFS通过blocknode list管理已分配的空间。 12345struct pmfs_blocknode &amp;#123;	struct list_head link;	unsigned long block_low;	unsigned long block_high;&amp;#125;;  在挂载PMFS操作中，super block、日志meta和inode table 指">
 <meta property="og:locale" content="default">
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://wtiny.cc/2019/07/01/2019-7-2-PMFS-space-management/">
+  <link rel="canonical" href="http://wtiny.cc/2019-7-2-PMFS-space-management.html">
 
 
 
@@ -222,86 +222,24 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wtiny.cc/2019/07/01/2019-7-2-PMFS-space-management/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ting Wu">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wt's Blog">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">2019-7-2-PMFS-space-management</h1>
-        
+	<h1 class="post-title" itemprop="name headline">2019-7-2-PMFS-space-management</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-01T19:29:53+08:00">
-                2019-07-01
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <h1 id="PMFS-空间管理分析"><a href="#PMFS-空间管理分析" class="headerlink" title="PMFS 空间管理分析"></a>PMFS 空间管理分析</h1><p>PMFS通过blocknode list管理已分配的空间。</p>
+      <div class="post-body">
+        
+        
+          <h1 id="PMFS-空间管理分析"><a href="#PMFS-空间管理分析" class="headerlink" title="PMFS 空间管理分析"></a>PMFS 空间管理分析</h1><p>PMFS通过blocknode list管理已分配的空间。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct pmfs_blocknode &#123;</span><br><span class="line">	struct list_head link;</span><br><span class="line">	unsigned long block_low;</span><br><span class="line">	unsigned long block_high;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>在挂载PMFS操作中，super block、日志meta和inode table 指针占据一个page，默认日志空间大小为4MB，inode table的初始化大小为2MB。最后，还分配了一个page作为root inode的btree root。</p>
@@ -310,61 +248,15 @@
 
 <p>因此，第二个blocknode 是从1536开始。PMFS挂载初始化后的空间布局如下图所示：<br><img src="/images/pmfs-space-management.png" alt="Git"></p>
 
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/06/10/关于Git/" rel="next" title="关于Git">
-                <i class="fa fa-chevron-left"></i> 关于Git
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/03/2019-7-3-Git已提交版本切换及回退/" rel="prev" title="2019-7-3-Git已提交版本切换及回退">
-                2019-7-3-Git已提交版本切换及回退 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -422,7 +314,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
